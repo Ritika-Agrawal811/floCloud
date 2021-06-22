@@ -5,6 +5,8 @@ body {
   --foreground-color: 255, 255, 255;
   --font-family: "Roboto", sans-serif;
   --error-color: #e53935;
+
+  font-family: "Roboto", sans-serif;
 }
 
 .main_block {
@@ -25,4 +27,5 @@ sm-button {
 
 #output {
   width: 100%;
+  overflow-x: scroll;
 }
