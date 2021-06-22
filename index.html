@@ -73,7 +73,10 @@
         ></sm-input>
         <sm-button variant="primary" id="sendUserMessage">Send</sm-button>
 
-        <p>Output:</p>
+        <p class="hide">Syntax:</p>
+        <pre id="syntax"></pre>
+
+        <p class="hide">Output:</p>
         <pre id="output"></pre>
       </div>
     </section>
@@ -82,6 +85,8 @@
       let userMessage = document.getElementById("userMessage");
       let sendUserMessage = document.getElementById("sendUserMessage");
       let output = document.getElementById("output");
+      let syntax = document.getElementById("syntax");
+      let hiddenElements = document.querySelectorAll(".hide");
 
       sendUserMessage.addEventListener("clicked", () => {
         console.log("sending message");
@@ -89,7 +94,13 @@
         floCloudAPI.sendGeneralData(userMessage.value, "type1").then(
           function (value) {
             alert("successful");
+
+            hiddenElements.forEach((element) => {
+              element.classList.remove("hide");
+            });
             output.innerHTML = JSON.stringify(value, undefined, 4);
+            output.classList.add("scroll");
+            syntax.innerHTML = `floCloudAPI.sendGeneralData(${userMessage.value}, "type1")`;
             console.log(value);
           },
           function (error) {

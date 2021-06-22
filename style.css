@@ -25,7 +25,15 @@ sm-button {
   margin-top: 1rem;
 }
 
-#output {
+#output,
+#syntax {
   width: 100%;
+}
+
+.scroll {
   overflow-x: scroll;
+}
+
+.hide {
+  visibility: hidden;
 }
