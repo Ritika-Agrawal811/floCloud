@@ -48,6 +48,7 @@ sm-button {
 
 .descriptionBlocks {
   position: absolute;
+  padding-right: 2em;
 }
 
 .description-container {
