@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>floCloud</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script id="floGlobals">
       /* Constants for FLO blockchain operations !!Make sure to add this at begining!! */
       const floGlobals = {
@@ -73,9 +73,81 @@
           id="userMessage"
         ></sm-input>
         <sm-button variant="primary" id="sendUserMessage">Send</sm-button>
+        <sm-button variant="primary" id="requestUserMessage">Request</sm-button>
 
-        <p class="hide">Syntax:</p>
-        <pre id="syntax"></pre>
+        <div class="description-container">
+          <div id="sendGeneralDataBlock" class="descriptionBlocks hideBlock">
+            <h2>sendGeneralData</h2>
+            <p>sendGeneralData sends general data to the cloud.</p>
+            <ul>
+              <li>Parameters</li>
+              <ol>
+                <li>message - data to be sent</li>
+                <li>type - type of the data</li>
+                <li>options -this parameter is optional</li>
+              </ol>
+
+              <li>Options</li>
+              <ol>
+                <li>receiverID - receiver of the data</li>
+                <li>
+                  application - name of the application sending the general data
+                </li>
+                <li>comment - user comment for the data</li>
+              </ol>
+            </ul>
+            <p>Syntax:</p>
+            <p class="syntax">
+              floCloudAPI.sendGeneralData(message, type, options = {})
+            </p>
+          </div>
+
+          <div id="requestGeneralDataBlock" class="descriptionBlocks hideBlock">
+            <h2>requestGeneralData</h2>
+            <p>requestGeneralData requests application data from the cloud.</p>
+            <ul>
+              <li>Parameters</li>
+              <ol>
+                <li>type - type of the data</li>
+                <li>options -this parameter is optional</li>
+              </ol>
+
+              <li>Options</li>
+              <ol>
+                <li>
+                  receiverID - receiver FLO ID of the data. ReceiverID is always
+                  a single value in our cloud design.
+                </li>
+                <li>
+                  senderIDs - array of senderIDs. This must be in an array even
+                  if a single senderID is requested
+                </li>
+                <li>
+                  application - name of the application that sent the general
+                  data
+                </li>
+                <li>comment - user comment for the data</li>
+                <li>
+                  lowerVectorClock - VC from which the data is to be requested
+                </li>
+                <li>
+                  upperVectorClock - VC till which the data is to be requested
+                </li>
+                <li>atVectorClock - VC at which the data is to requested</li>
+                <li>
+                  mostRecent - boolean (true: request only the recent data
+                  matching the pattern. Just the last one)
+                </li>
+              </ol>
+            </ul>
+            <p>Syntax:</p>
+            <p class="syntax">
+              floCloudAPI.requestGeneralData(type, options = {})
+            </p>
+          </div>
+        </div>
+        <p class="hide">Code:</p>
+        <pre id="code"></pre>
 
         <p class="hide">Output:</p>
         <pre id="output"></pre>
@@ -83,33 +155,95 @@
     </section>
 
     <script>
+      let type = "type2";
+
       let userMessage = document.getElementById("userMessage");
-      let sendUserMessage = document.getElementById("sendUserMessage");
       let output = document.getElementById("output");
-      let syntax = document.getElementById("syntax");
+      let code = document.getElementById("code");
       let hiddenElements = document.querySelectorAll(".hide");
+      let descriptionContainer = document.querySelector(
+        ".description-container"
+      );
+
+      let descriptionBlocks = [
+        "sendGeneralDataBlock",
+        "requestGeneralDataBlock",
+      ];
+
+      // buttons
+      let sendUserMessage = document.getElementById("sendUserMessage");
+      let requestUserMessage = document.getElementById("requestUserMessage");
 
       sendUserMessage.addEventListener("clicked", () => {
         console.log("sending message");
-        message = userMessage.value;
-        floCloudAPI.sendGeneralData(userMessage.value, "type1").then(
+
+        floCloudAPI.sendGeneralData(userMessage.value, type).then(
           function (value) {
             alert("successful");
+            let elementInfo;
+            for (let i = 0; i < descriptionBlocks.length; i++) {
+              let descriptionBlock = document.getElementById(
+                descriptionBlocks[i]
+              );
+
+              if (i == 0) {
+                descriptionBlock.classList.remove("hideBlock");
+                elementInfo = descriptionBlock.getBoundingClientRect();
+                console.log(elementInfo.height);
+                descriptionContainer.style.height = elementInfo.height + "px";
+              } else {
+                descriptionBlock.classList.add("hideBlock");
+              }
+            }
 
             hiddenElements.forEach((element) => {
               element.classList.remove("hide");
             });
             output.innerHTML = JSON.stringify(value, undefined, 4);
             output.classList.add("scroll");
-            syntax.innerHTML = `floCloudAPI.sendGeneralData(${userMessage.value}, "type1")`;
+            code.innerHTML = `floCloudAPI.sendGeneralData("${userMessage.value}", "${type}")`;
             console.log(value);
           },
           function (error) {
-            console.log("unsuccessful");
+            alert("unsuccessful");
           }
         );
+      });
 
-        // console.log(returnValue);
+      requestUserMessage.addEventListener("clicked", () => {
+        console.log("requesting message");
+        floCloudAPI.requestGeneralData(type).then(
+          function (value) {
+            alert("successful");
+
+            let elementInfo;
+            for (let i = 0; i < descriptionBlocks.length; i++) {
+              let descriptionBlock = document.getElementById(
+                descriptionBlocks[i]
+              );
+
+              if (i == 1) {
+                descriptionBlock.classList.remove("hideBlock");
+                elementInfo = descriptionBlock.getBoundingClientRect();
+                console.log(elementInfo.height);
+                descriptionContainer.style.height = elementInfo.height + "px";
+              } else {
+                descriptionBlock.classList.add("hideBlock");
+              }
+            }
+
+            hiddenElements.forEach((element) => {
+              element.classList.remove("hide");
+            });
+            output.innerHTML = JSON.stringify(value, undefined, 4);
+            output.classList.add("scroll");
+            code.innerHTML = `floCloudAPI.requestGeneralData("${type}"")`;
+            console.log(value);
+          },
+          function (error) {
+            alert("unsuccessful");
+          }
+        );
       });
     </script>
     <script src="scripts/components.js"></script>

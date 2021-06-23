@@ -6,19 +6,23 @@ body {
   --font-family: "Roboto", sans-serif;
   --error-color: #e53935;
 
+  /* background-color: rgb(243, 244, 246); */
   font-family: "Roboto", sans-serif;
+  overflow-y: scroll;
 }
 
 .main_block {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  padding: 1em;
 }
 
 .form-group {
-  max-width: 600px;
+  margin-top: 10em;
+  max-width: 800px;
   width: 90%;
+  padding: 2em;
 }
 
 sm-button {
@@ -26,7 +30,7 @@ sm-button {
 }
 
 #output,
-#syntax {
+#code {
   width: 100%;
 }
 
@@ -36,4 +40,16 @@ sm-button {
 
 .hide {
   visibility: hidden;
+}
+
+.hideBlock {
+  visibility: hidden;
+}
+
+.descriptionBlocks {
+  position: absolute;
+}
+
+.description-container {
+  width: 100%;
 }
