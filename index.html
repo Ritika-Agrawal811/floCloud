@@ -66,91 +66,232 @@
   <body onload="onLoadStartUp()">
     <section class="main_block">
       <div class="form-group">
-        <sm-input
-          placeholder="Type your message here"
-          type="text"
-          animate
-          id="userMessage"
-        ></sm-input>
-        <sm-button variant="primary" id="sendUserMessage">Send</sm-button>
-        <sm-button variant="primary" id="requestUserMessage">Request</sm-button>
+        <h1>floCloudAPI</h1>
+        <p>
+          RanchiMall blockchain cloud is a service to provide a set of
+          decentralized servers that will provide data storage to users. These
+          decentralized servers are listed in the FLO Blockchain under an
+          authorized FLO address.
+        </p>
 
-        <div class="description-container">
-          <div id="sendGeneralDataBlock" class="descriptionBlocks hideBlock">
-            <h2>sendGeneralData</h2>
-            <p>sendGeneralData sends general data to the cloud.</p>
-            <ul>
-              <li>Parameters</li>
-              <ol>
-                <li>message - data to be sent</li>
-                <li>type - type of the data</li>
-                <li>options -this parameter is optional</li>
-              </ol>
+        <p>
+          floCloudAPI operations can interact with floSupernode cloud to send
+          and retrieve data for applications. floCloudAPI uses floSupernode
+          module for backend interactions. FLO Cloud API functions are
+          promisified and resolves the data or status.
+        </p>
 
-              <li>Options</li>
-              <ol>
-                <li>receiverID - receiver of the data</li>
-                <li>
-                  application - name of the application sending the general data
-                </li>
-                <li>comment - user comment for the data</li>
-              </ol>
-            </ul>
-            <p>Syntax:</p>
-            <p class="syntax">
-              floCloudAPI.sendGeneralData(message, type, options = {})
-            </p>
-          </div>
+        <p>
+          The basic forms in which users can submit data to the cloud are
+          General Data , Object Data and Application Data.
+        </p>
 
-          <div id="requestGeneralDataBlock" class="descriptionBlocks hideBlock">
-            <h2>requestGeneralData</h2>
-            <p>requestGeneralData requests application data from the cloud.</p>
-            <ul>
-              <li>Parameters</li>
-              <ol>
-                <li>type - type of the data</li>
-                <li>options -this parameter is optional</li>
-              </ol>
+        <sm-tab-header variant="tab" target="tab1">
+          <sm-tab rank="0" class="active">Application Data</sm-tab>
+          <sm-tab rank="1" class="">General Data</sm-tab>
+        </sm-tab-header>
 
-              <li>Options</li>
-              <ol>
-                <li>
-                  receiverID - receiver FLO ID of the data. ReceiverID is always
-                  a single value in our cloud design.
-                </li>
-                <li>
-                  senderIDs - array of senderIDs. This must be in an array even
-                  if a single senderID is requested
-                </li>
-                <li>
-                  application - name of the application that sent the general
-                  data
-                </li>
-                <li>comment - user comment for the data</li>
-                <li>
-                  lowerVectorClock - VC from which the data is to be requested
-                </li>
-                <li>
-                  upperVectorClock - VC till which the data is to be requested
-                </li>
-                <li>atVectorClock - VC at which the data is to requested</li>
-                <li>
-                  mostRecent - boolean (true: request only the recent data
-                  matching the pattern. Just the last one)
-                </li>
-              </ol>
-            </ul>
-            <p>Syntax:</p>
-            <p class="syntax">
-              floCloudAPI.requestGeneralData(type, options = {})
-            </p>
-          </div>
-        </div>
-        <p class="hide">Code:</p>
-        <pre id="code"></pre>
+        <sm-tab-panels id="tab1">
+          <sm-panel class="panels">
+            <div
+              id="sendApplicationDataBlock"
+              class="descriptionBlocks hideBlock"
+            >
+              <h2>sendApplicationData</h2>
+              <p>sendApplicationData sends application data to the cloud.</p>
+              <ul>
+                <li>Parameters</li>
+                <ol>
+                  <li>message - data to be sent</li>
+                  <li>type - type of the data</li>
+                  <li>options -this parameter is optional</li>
+                </ol>
 
-        <p class="hide">Output:</p>
-        <pre id="output"></pre>
+                <li>Options</li>
+                <ol>
+                  <li>receiverID - receiver of the data</li>
+                  <li>
+                    application - name of the application sending the general
+                    data
+                  </li>
+                  <li>comment - user comment for the data</li>
+                </ol>
+              </ul>
+              <p>Syntax:</p>
+              <p class="syntax">
+                floCloudAPI.sendApplicationData(message, type, options = {})
+              </p>
+            </div>
+
+            <div class="demoSendApplicationData demoArea">
+              <h3>Demo</h3>
+              <sm-input
+                placeholder="Type your message here"
+                type="text"
+                animate
+                id="userMessage"
+                class="demo-inner-blocks"
+              >
+              </sm-input>
+              <sm-button variant="primary" id="sendApplicationMessage"
+                >Send</sm-button
+              >
+            </div>
+
+            <div
+              id="requestApplicationDataBlock"
+              class="descriptionBlocks hideBlock"
+            >
+              <h2>requestApplicationData</h2>
+              <p>
+                requestApplicationData requests application data from the cloud.
+              </p>
+              <ul>
+                <li>Parameters</li>
+                <ol>
+                  <li>options -this parameter is optional</li>
+                </ol>
+
+                <li>Options</li>
+                <ol>
+                  <li>
+                    receiverID - receiver FLO ID of the data. ReceiverID is
+                    always a single value in our cloud design.
+                  </li>
+                  <li>
+                    Type: User defined type (retrieves all data of that type
+                    which the sender might have used in SEND DATA phase)
+                  </li>
+                  <li>
+                    senderIDs - array of senderIDs. This must be in an array
+                    even if a single senderID is requested
+                  </li>
+                  <li>
+                    application - name of the application that sent the general
+                    data
+                  </li>
+                  <li>comment - user comment for the data</li>
+                  <li>
+                    lowerVectorClock - VC from which the data is to be requested
+                  </li>
+                  <li>
+                    upperVectorClock - VC till which the data is to be requested
+                  </li>
+                  <li>atVectorClock - VC at which the data is to requested</li>
+                  <li>
+                    mostRecent - boolean (true: request only the recent data
+                    matching the pattern. Just the last one)
+                  </li>
+                </ol>
+              </ul>
+              <p>Syntax:</p>
+              <p class="syntax">
+                floCloudAPI.requestApplicationData(options = {})
+              </p>
+            </div>
+
+            <div class="demoRequestApplicationData demoArea">
+              <h3>Demo</h3>
+              <sm-button variant="primary" id="requestApplicationMessage"
+                >Request</sm-button
+              >
+            </div>
+          </sm-panel>
+
+          <sm-panel class="hide-completely panels">
+            <div id="sendGeneralDataBlock" class="descriptionBlocks">
+              <h2>sendGeneralData</h2>
+              <p>sendGeneralData sends general data to the cloud.</p>
+              <ul>
+                <li>Parameters</li>
+                <ol>
+                  <li>message - data to be sent</li>
+                  <li>type - type of the data</li>
+                  <li>options -this parameter is optional</li>
+                </ol>
+
+                <li>Options</li>
+                <ol>
+                  <li>receiverID - receiver of the data</li>
+                  <li>
+                    application - name of the application sending the general
+                    data
+                  </li>
+                  <li>comment - user comment for the data</li>
+                </ol>
+              </ul>
+              <p>Syntax:</p>
+              <p class="syntax">
+                floCloudAPI.sendGeneralData(message, type, options = {})
+              </p>
+            </div>
+
+            <div class="demoSendGeneralData demoArea">
+              <h3>Demo</h3>
+              <sm-input
+                placeholder="Type your message here"
+                type="text"
+                animate
+                id="userMessage"
+                class="demo-inner-blocks"
+              >
+              </sm-input>
+              <sm-button variant="primary" id="sendUserMessage">Send</sm-button>
+            </div>
+
+            <div id="requestGeneralDataBlock" class="descriptionBlocks">
+              <h2>requestGeneralData</h2>
+              <p>
+                requestGeneralData requests application data from the cloud.
+              </p>
+              <ul>
+                <li>Parameters</li>
+                <ol>
+                  <li>type - type of the data</li>
+                  <li>options -this parameter is optional</li>
+                </ol>
+
+                <li>Options</li>
+                <ol>
+                  <li>
+                    receiverID - receiver FLO ID of the data. ReceiverID is
+                    always a single value in our cloud design.
+                  </li>
+                  <li>
+                    senderIDs - array of senderIDs. This must be in an array
+                    even if a single senderID is requested
+                  </li>
+                  <li>
+                    application - name of the application that sent the general
+                    data
+                  </li>
+                  <li>comment - user comment for the data</li>
+                  <li>
+                    lowerVectorClock - VC from which the data is to be requested
+                  </li>
+                  <li>
+                    upperVectorClock - VC till which the data is to be requested
+                  </li>
+                  <li>atVectorClock - VC at which the data is to requested</li>
+                  <li>
+                    mostRecent - boolean (true: request only the recent data
+                    matching the pattern. Just the last one)
+                  </li>
+                </ol>
+              </ul>
+              <p>Syntax:</p>
+              <p class="syntax">
+                floCloudAPI.requestGeneralData(type, options = {})
+              </p>
+            </div>
+            <div class="demoRequestGeneralData demoArea">
+              <h3>Demo</h3>
+              <sm-button variant="primary" id="requestUserMessage"
+                >Request</sm-button
+              >
+            </div>
+          </sm-panel>
+        </sm-tab-panels>
       </div>
     </section>
 
@@ -158,21 +299,49 @@
       let type = "type2";
 
       let userMessage = document.getElementById("userMessage");
-      let output = document.getElementById("output");
-      let code = document.getElementById("code");
-      let hiddenElements = document.querySelectorAll(".hide");
-      let descriptionContainer = document.querySelector(
-        ".description-container"
-      );
-
-      let descriptionBlocks = [
-        "sendGeneralDataBlock",
-        "requestGeneralDataBlock",
+      let demo = [
+        "demoSendGeneralData",
+        "demoRequestGeneralData",
+        "demoSendApplicationData",
+        "demoRequestApplicationData",
       ];
 
       // buttons
       let sendUserMessage = document.getElementById("sendUserMessage");
       let requestUserMessage = document.getElementById("requestUserMessage");
+      let sendApplicationMessage = document.getElementById(
+        "sendApplicationMessage"
+      );
+      let requestApplicationMessage = document.getElementById(
+        "requestApplicationMessage"
+      );
+
+      sendApplicationMessage.addEventListener("clicked", () => {
+        console.log("sending message");
+
+        floCloudAPI.sendApplicationData(userMessage.value, type).then(
+          function (value) {
+            alert("successful");
+            displayCode(value, 2);
+          },
+          function (error) {
+            alert("unsuccessful");
+          }
+        );
+      });
+
+      requestApplicationMessage.addEventListener("clicked", () => {
+        console.log("requesting message");
+        floCloudAPI.requestApplicationData().then(
+          function (value) {
+            alert("successful");
+            displayCode(value, 3);
+          },
+          function (error) {
+            alert("unsuccessful");
+          }
+        );
+      });
 
       sendUserMessage.addEventListener("clicked", () => {
         console.log("sending message");
@@ -180,29 +349,7 @@
         floCloudAPI.sendGeneralData(userMessage.value, type).then(
           function (value) {
             alert("successful");
-            let elementInfo;
-            for (let i = 0; i < descriptionBlocks.length; i++) {
-              let descriptionBlock = document.getElementById(
-                descriptionBlocks[i]
-              );
-
-              if (i == 0) {
-                descriptionBlock.classList.remove("hideBlock");
-                elementInfo = descriptionBlock.getBoundingClientRect();
-                console.log(elementInfo.height);
-                descriptionContainer.style.height = elementInfo.height + "px";
-              } else {
-                descriptionBlock.classList.add("hideBlock");
-              }
-            }
-
-            hiddenElements.forEach((element) => {
-              element.classList.remove("hide");
-            });
-            output.innerHTML = JSON.stringify(value, undefined, 4);
-            output.classList.add("scroll");
-            code.innerHTML = `floCloudAPI.sendGeneralData("${userMessage.value}", "${type}")`;
-            console.log(value);
+            displayCode(value, 0);
           },
           function (error) {
             alert("unsuccessful");
@@ -216,35 +363,47 @@
           function (value) {
             alert("successful");
 
-            let elementInfo;
-            for (let i = 0; i < descriptionBlocks.length; i++) {
-              let descriptionBlock = document.getElementById(
-                descriptionBlocks[i]
-              );
-
-              if (i == 1) {
-                descriptionBlock.classList.remove("hideBlock");
-                elementInfo = descriptionBlock.getBoundingClientRect();
-                console.log(elementInfo.height);
-                descriptionContainer.style.height = elementInfo.height + "px";
-              } else {
-                descriptionBlock.classList.add("hideBlock");
-              }
-            }
-
-            hiddenElements.forEach((element) => {
-              element.classList.remove("hide");
-            });
-            output.innerHTML = JSON.stringify(value, undefined, 4);
-            output.classList.add("scroll");
-            code.innerHTML = `floCloudAPI.requestGeneralData("${type}"")`;
-            console.log(value);
+            displayCode(value, 1);
           },
           function (error) {
             alert("unsuccessful");
           }
         );
       });
+
+      function displayCode(value, index) {
+        let demoBlock = document.querySelector("." + demo[index]);
+        let frag = document.createDocumentFragment();
+        let codeLabel = document.createElement("p");
+        let outputLabel = document.createElement("p");
+        let codeBlock = document.createElement("pre");
+        let outputBlock = document.createElement("pre");
+
+        outputBlock.classList.add("scroll");
+        outputBlock.classList.add("demo-inner-blocks");
+        codeBlock.classList.add("demo-inner-blocks");
+
+        codeLabel.innerHTML = "Code:";
+        outputLabel.innerHTML = "Output:";
+        outputBlock.innerHTML = JSON.stringify(value, undefined, 4);
+
+        if (index == 0) {
+          codeBlock.innerHTML = `floCloudAPI.sendGeneralData("${userMessage.value}", "${type}")`;
+        } else if (index == 1) {
+          codeBlock.innerHTML = `floCloudAPI.requestGeneralData("${type}"")`;
+        } else if (index == 2) {
+          codeBlock.innerHTML = `floCloudAPI.sendApplicationData("${userMessage.value}", "${type}")`;
+        } else if (index == 3) {
+          codeBlock.innerHTML = `floCloudAPI.requestApplicationData()`;
+        }
+
+        frag.appendChild(codeLabel);
+        frag.appendChild(codeBlock);
+        frag.appendChild(outputLabel);
+        frag.appendChild(outputBlock);
+
+        demoBlock.appendChild(frag);
+      }
     </script>
     <script src="scripts/components.js"></script>
 

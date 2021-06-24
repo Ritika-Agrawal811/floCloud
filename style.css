@@ -19,38 +19,29 @@ body {
 }
 
 .form-group {
-  margin-top: 10em;
   max-width: 800px;
   width: 90%;
-  padding: 2em;
+  padding: 1.5em;
 }
 
 sm-button {
   margin-top: 1rem;
 }
 
-#output,
-#code {
-  width: 100%;
-}
-
 .scroll {
   overflow-x: scroll;
 }
 
-.hide {
-  visibility: hidden;
+.panels {
+  margin-top: 2em;
 }
 
-.hideBlock {
-  visibility: hidden;
+.demoArea {
+  max-width: 800px;
+  width: 90%;
+  padding: 0 1em;
 }
 
-.descriptionBlocks {
-  position: absolute;
-  padding-right: 2em;
-}
-
-.description-container {
+.demo-inner-blocks {
   width: 100%;
 }
