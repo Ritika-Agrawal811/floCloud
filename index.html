@@ -89,6 +89,7 @@
         <sm-tab-header variant="tab" target="tab1">
           <sm-tab rank="0" class="active">Application Data</sm-tab>
           <sm-tab rank="1" class="">General Data</sm-tab>
+          <sm-tab rank="2" class="">Object Data</sm-tab>
         </sm-tab-header>
 
         <sm-tab-panels id="tab1">
@@ -198,6 +199,8 @@
             </div>
           </sm-panel>
 
+          <!-- General Data -->
+
           <sm-panel class="hide-completely panels">
             <div id="sendGeneralDataBlock" class="descriptionBlocks">
               <h2>sendGeneralData</h2>
@@ -291,6 +294,133 @@
               >
             </div>
           </sm-panel>
+
+          <!-- Object Data -->
+
+          <sm-panel class="hide-completely panels">
+            <div id="sendGeneralDataBlock" class="descriptionBlocks">
+              <h2>updateObjectData</h2>
+              <p>updateObjectData updates the objectData to cloud.</p>
+              <ul>
+                <li>Parameters</li>
+                <ol>
+                  <li>
+                    "objectName" - Name of the objectData to be updated. Quotes
+                    are must.
+                  </li>
+                  <li>options -this parameter is optional</li>
+                </ol>
+
+                <li>Options</li>
+                <ol>
+                  <li>receiverID - receiver of the data</li>
+                  <li>
+                    application - name of the application sending the general
+                    data
+                  </li>
+                  <li>comment - user comment for the data</li>
+                </ol>
+              </ul>
+              <p>Syntax:</p>
+              <p class="syntax">
+                floCloudAPI.updateObjectData("objectName", options = {})
+              </p>
+            </div>
+
+            <div class="demoUpdateObjectData demoArea">
+              <h3>Demo</h3>
+              <sm-input
+                placeholder="Type the name of the Object"
+                type="text"
+                animate
+                id="objectName"
+                class="demo-inner-blocks"
+              >
+              </sm-input>
+
+              <div class="keyValuePairs" id="updateKeyValueBlock">
+                <h4>Key-Value Pairs</h4>
+                <p>Write the key value pairs for the Object.</p>
+                <div id="pair1" class="pairs">
+                  <sm-input
+                    placeholder="Type the key"
+                    type="text"
+                    animate
+                    class="object-inner-blocks key"
+                  >
+                  </sm-input>
+                  <sm-input
+                    placeholder="Type the Value"
+                    type="text"
+                    animate
+                    class="object-inner-blocks value"
+                  >
+                  </sm-input>
+                  <div
+                    class="plus"
+                    onclick="addKeyValuePairs('updateKeyValueBlock' ,'pair1', 2)"
+                  >
+                    +
+                  </div>
+                </div>
+              </div>
+              <sm-button variant="primary" id="updateObjectData"
+                >Update</sm-button
+              >
+            </div>
+
+            <div id="requestGeneralDataBlock" class="descriptionBlocks">
+              <h2>requestGeneralData</h2>
+              <p>
+                requestGeneralData requests application data from the cloud.
+              </p>
+              <ul>
+                <li>Parameters</li>
+                <ol>
+                  <li>type - type of the data</li>
+                  <li>options -this parameter is optional</li>
+                </ol>
+
+                <li>Options</li>
+                <ol>
+                  <li>
+                    receiverID - receiver FLO ID of the data. ReceiverID is
+                    always a single value in our cloud design.
+                  </li>
+                  <li>
+                    senderIDs - array of senderIDs. This must be in an array
+                    even if a single senderID is requested
+                  </li>
+                  <li>
+                    application - name of the application that sent the general
+                    data
+                  </li>
+                  <li>comment - user comment for the data</li>
+                  <li>
+                    lowerVectorClock - VC from which the data is to be requested
+                  </li>
+                  <li>
+                    upperVectorClock - VC till which the data is to be requested
+                  </li>
+                  <li>atVectorClock - VC at which the data is to requested</li>
+                  <li>
+                    mostRecent - boolean (true: request only the recent data
+                    matching the pattern. Just the last one)
+                  </li>
+                </ol>
+              </ul>
+              <p>Syntax:</p>
+              <p class="syntax">
+                floCloudAPI.requestGeneralData(type, options = {})
+              </p>
+            </div>
+            <div class="demoRequestGeneralData demoArea">
+              <h3>Demo</h3>
+              <sm-button variant="primary" id="requestUserMessage"
+                >Request</sm-button
+              >
+            </div>
+          </sm-panel>
         </sm-tab-panels>
       </div>
     </section>
@@ -299,22 +429,41 @@
       let type = "type2";
 
       let userMessage = document.getElementById("userMessage");
+      let objectName = document.getElementById("objectName");
       let demo = [
         "demoSendGeneralData",
         "demoRequestGeneralData",
         "demoSendApplicationData",
         "demoRequestApplicationData",
+        "demoUpdateObjectData",
       ];
 
       // buttons
       let sendUserMessage = document.getElementById("sendUserMessage");
       let requestUserMessage = document.getElementById("requestUserMessage");
+      let updateObjectData = document.getElementById("updateObjectData");
       let sendApplicationMessage = document.getElementById(
         "sendApplicationMessage"
       );
       let requestApplicationMessage = document.getElementById(
         "requestApplicationMessage"
       );
+
+      updateObjectData.addEventListener("clicked", () => {
+        console.log("sending message");
+
+        let objName = generateObject("updateKeyValueBlock");
+
+        floCloudAPI.updateObjectData(objName).then(
+          function (value) {
+            alert("successful");
+            displayCode(value, 4);
+          },
+          function (error) {
+            alert("unsuccessful");
+          }
+        );
+      });
 
       sendApplicationMessage.addEventListener("clicked", () => {
         console.log("sending message");
@@ -395,6 +544,8 @@
           codeBlock.innerHTML = `floCloudAPI.sendApplicationData("${userMessage.value}", "${type}")`;
         } else if (index == 3) {
           codeBlock.innerHTML = `floCloudAPI.requestApplicationData()`;
+        } else if (index == 4) {
+          codeBlock.innerHTML = `floCloudAPI.updateObjectData("${objectName.value}")`;
         }
 
         frag.appendChild(codeLabel);
@@ -403,6 +554,43 @@
         frag.appendChild(outputBlock);
 
         demoBlock.appendChild(frag);
+      }
+
+      function addKeyValuePairs(id, pairId, index) {
+        let keyValueBlock = document.getElementById(id);
+        let pairBlock = document.getElementById(pairId);
+        let pairClone = pairBlock.cloneNode(true);
+        let plusBtn = pairBlock.querySelector(".plus");
+        let plusBtnNew = pairClone.querySelector(".plus");
+
+        pairBlock.removeChild(plusBtn);
+        pairClone.setAttribute("id", "pair" + index);
+        plusBtnNew.setAttribute(
+          "onclick",
+          `addKeyValuePairs('updateKeyValueBlock' ,'pair${index}', ${
+            index + 1
+          })`
+        );
+
+        keyValueBlock.appendChild(pairClone);
+      }
+
+      function generateObject(id) {
+        let keyValueBlock = document.getElementById(id);
+        let pairs = keyValueBlock.querySelectorAll(".pairs");
+        let objUser = objectName.value;
+        let obj = {};
+
+        pairs.forEach((pair) => {
+          let key = pair.querySelector(".key").value;
+          let value = pair.querySelector(".value").value;
+
+          obj[key] = value;
+        });
+
+        floGlobals.appObjects[objUser] = obj;
+
+        return objUser;
       }
     </script>
     <script src="scripts/components.js"></script>

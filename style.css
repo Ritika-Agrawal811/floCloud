@@ -19,7 +19,7 @@ body {
 }
 
 .form-group {
-  max-width: 800px;
+  max-width: 900px;
   width: 90%;
   padding: 1.5em;
 }
@@ -34,14 +34,43 @@ sm-button {
 
 .panels {
   margin-top: 2em;
+  width: 100%;
 }
 
 .demoArea {
-  max-width: 800px;
+  max-width: 900px;
   width: 90%;
   padding: 0 1em;
 }
 
-.demo-inner-blocks {
+.demo-inner-blocks,
+.descriptionBlocks {
   width: 100%;
+}
+
+.keyValuePairs {
+  margin-top: 1em;
+}
+
+.pairs {
+  display: flex;
+  align-items: center;
+  margin-top: 1em;
+}
+
+.object-inner-blocks {
+  margin-right: 1em;
+}
+
+.plus {
+  font-size: 2rem;
+  background-color: rgba(var(--text-color), 0.06);
+  color: #696969;
+  width: 1em;
+  height: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
 }
