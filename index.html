@@ -571,6 +571,7 @@
         floCloudAPI.requestObjectData(objName).then(
           function (value) {
             let result = floGlobals.appObjects[objName];
+
             alert("successful");
             displayCode(result, 6);
           },
@@ -677,7 +678,7 @@
 
       function addKeyValuePairs(id, pairId, index) {
         let keyValueBlock = document.getElementById(id);
-        let pairBlock = document.getElementById(pairId);
+        let pairBlock = keyValueBlock.querySelector("#" + pairId);
         let pairClone = pairBlock.cloneNode(true);
         let plusBtn = pairBlock.querySelector(".plus");
         let plusBtnNew = pairClone.querySelector(".plus");
@@ -686,9 +687,7 @@
         pairClone.setAttribute("id", "pair" + index);
         plusBtnNew.setAttribute(
           "onclick",
-          `addKeyValuePairs('updateKeyValueBlock' ,'pair${index}', ${
-            index + 1
-          })`
+          `addKeyValuePairs('${id}' ,'pair${index}', ${index + 1})`
         );
 
         keyValueBlock.appendChild(pairClone);
