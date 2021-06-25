@@ -298,7 +298,78 @@
           <!-- Object Data -->
 
           <sm-panel class="hide-completely panels">
-            <div id="sendGeneralDataBlock" class="descriptionBlocks">
+            <div id="resetObjectDataBlock" class="descriptionBlocks">
+              <h2>resetObjectData</h2>
+              <p>resetObjectData resets the objectData to cloud.</p>
+              <ul>
+                <li>Parameters</li>
+                <ol>
+                  <li>
+                    "objectName" - Name of the objectData to be updated. Quotes
+                    are must.
+                  </li>
+                  <li>options -this parameter is optional</li>
+                </ol>
+
+                <li>Options</li>
+                <ol>
+                  <li>receiverID - receiver of the data</li>
+                  <li>
+                    application - name of the application sending the general
+                    data
+                  </li>
+                  <li>comment - user comment for the data</li>
+                </ol>
+              </ul>
+              <p>Syntax:</p>
+              <p class="syntax">
+                floCloudAPI.resetObjectData("objectName", options = {})
+              </p>
+            </div>
+
+            <div class="demoResetObjectData demoArea">
+              <h3>Demo</h3>
+              <sm-input
+                placeholder="Type the name of the Object"
+                type="text"
+                animate
+                id="objectName"
+                class="demo-inner-blocks"
+              >
+              </sm-input>
+
+              <div class="keyValuePairs" id="resetKeyValueBlock">
+                <h4>Key-Value Pairs</h4>
+                <p>Write the key value pairs for the Object.</p>
+                <div id="pair1" class="pairs">
+                  <sm-input
+                    placeholder="Type the key"
+                    type="text"
+                    animate
+                    class="object-inner-blocks key"
+                  >
+                  </sm-input>
+                  <sm-input
+                    placeholder="Type the Value"
+                    type="text"
+                    animate
+                    class="object-inner-blocks value"
+                  >
+                  </sm-input>
+                  <div
+                    class="plus"
+                    onclick="addKeyValuePairs('resetKeyValueBlock' ,'pair1', 2)"
+                  >
+                    +
+                  </div>
+                </div>
+              </div>
+              <sm-button variant="primary" id="resetObjectData"
+                >Reset</sm-button
+              >
+            </div>
+
+            <div id="updateObjectDataBlock" class="descriptionBlocks">
               <h2>updateObjectData</h2>
               <p>updateObjectData updates the objectData to cloud.</p>
               <ul>
@@ -368,58 +439,6 @@
                 >Update</sm-button
               >
             </div>
-
-            <div id="requestGeneralDataBlock" class="descriptionBlocks">
-              <h2>requestGeneralData</h2>
-              <p>
-                requestGeneralData requests application data from the cloud.
-              </p>
-              <ul>
-                <li>Parameters</li>
-                <ol>
-                  <li>type - type of the data</li>
-                  <li>options -this parameter is optional</li>
-                </ol>
-
-                <li>Options</li>
-                <ol>
-                  <li>
-                    receiverID - receiver FLO ID of the data. ReceiverID is
-                    always a single value in our cloud design.
-                  </li>
-                  <li>
-                    senderIDs - array of senderIDs. This must be in an array
-                    even if a single senderID is requested
-                  </li>
-                  <li>
-                    application - name of the application that sent the general
-                    data
-                  </li>
-                  <li>comment - user comment for the data</li>
-                  <li>
-                    lowerVectorClock - VC from which the data is to be requested
-                  </li>
-                  <li>
-                    upperVectorClock - VC till which the data is to be requested
-                  </li>
-                  <li>atVectorClock - VC at which the data is to requested</li>
-                  <li>
-                    mostRecent - boolean (true: request only the recent data
-                    matching the pattern. Just the last one)
-                  </li>
-                </ol>
-              </ul>
-              <p>Syntax:</p>
-              <p class="syntax">
-                floCloudAPI.requestGeneralData(type, options = {})
-              </p>
-            </div>
-            <div class="demoRequestGeneralData demoArea">
-              <h3>Demo</h3>
-              <sm-button variant="primary" id="requestUserMessage"
-                >Request</sm-button
-              >
-            </div>
           </sm-panel>
         </sm-tab-panels>
       </div>
@@ -435,12 +454,14 @@
         "demoRequestGeneralData",
         "demoSendApplicationData",
         "demoRequestApplicationData",
+        "demoResetObjectData" , 
         "demoUpdateObjectData",
       ];
 
       // buttons
       let sendUserMessage = document.getElementById("sendUserMessage");
       let requestUserMessage = document.getElementById("requestUserMessage");
+      let resetObjectData = document.getElementById("resetObjectData");
       let updateObjectData = document.getElementById("updateObjectData");
       let sendApplicationMessage = document.getElementById(
         "sendApplicationMessage"
@@ -448,6 +469,22 @@
       let requestApplicationMessage = document.getElementById(
         "requestApplicationMessage"
       );
+
+      resetObjectData.addEventListener("clicked", () => {
+        console.log("sending message");
+
+        let objName = generateObject("resetKeyValueBlock");
+
+        floCloudAPI.resetObjectData(objName).then(
+          function (value) {
+            alert("successful");
+            displayCode(value, 4);
+          },
+          function (error) {
+            alert("unsuccessful");
+          }
+        );
+      });
 
       updateObjectData.addEventListener("clicked", () => {
         console.log("sending message");
@@ -457,7 +494,7 @@
         floCloudAPI.updateObjectData(objName).then(
           function (value) {
             alert("successful");
-            displayCode(value, 4);
+            displayCode(value, 5);
           },
           function (error) {
             alert("unsuccessful");
@@ -545,6 +582,8 @@
         } else if (index == 3) {
           codeBlock.innerHTML = `floCloudAPI.requestApplicationData()`;
         } else if (index == 4) {
+          codeBlock.innerHTML = `floCloudAPI.resetObjectData("${objectName.value}")`;
+        }else if (index == 5) {
           codeBlock.innerHTML = `floCloudAPI.updateObjectData("${objectName.value}")`;
         }
 
