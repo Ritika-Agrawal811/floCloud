@@ -439,6 +439,65 @@
                 >Update</sm-button
               >
             </div>
+
+            <div id="requestObjectDataBlock" class="descriptionBlocks">
+              <h2>requestObjectData</h2>
+              <p>requestObjectData requests application data from the cloud.</p>
+              <ul>
+                <li>Parameters</li>
+                <ol>
+                  <li>
+                    "objectName" - Name of the objectData to be requested.
+                    Quotes are must.
+                  </li>
+                  <li>options -this parameter is optional</li>
+                </ol>
+
+                <li>Options</li>
+                <ol>
+                  <li>receiverID - receiver of the data</li>
+                  <li>
+                    senderIDs - array of senderIDs. This must be in an array
+                    even if a single senderID is requested
+                  </li>
+                  <li>
+                    application - name of the application sending the general
+                    data
+                  </li>
+                  <li>comment - user comment for the data</li>
+                  <li>
+                    lowerVectorClock - VC from which the data is to be requested
+                  </li>
+                  <li>
+                    upperVectorClock - VC till which the data is to be requested
+                  </li>
+                  <li>atVectorClock - VC at which the data is to requested</li>
+                  <li>
+                    mostRecent - boolean (true: request only the recent data
+                    matching the pattern. Just the last one.)
+                  </li>
+                </ol>
+              </ul>
+              <p>Syntax:</p>
+              <p class="syntax">
+                floCloudAPI.requestObjectData("objectName", options = {})
+              </p>
+            </div>
+
+            <div class="demoRequestObjectData demoArea">
+              <h3>Demo</h3>
+              <sm-input
+                placeholder="Type the name of the Object"
+                type="text"
+                animate
+                id="objectName"
+                class="demo-inner-blocks"
+              >
+              </sm-input>
+              <sm-button variant="primary" id="requestObjectData"
+                >Request</sm-button
+              >
+            </div>
           </sm-panel>
         </sm-tab-panels>
       </div>
@@ -454,8 +513,9 @@
         "demoRequestGeneralData",
         "demoSendApplicationData",
         "demoRequestApplicationData",
-        "demoResetObjectData" , 
+        "demoResetObjectData",
         "demoUpdateObjectData",
+        "demoRequestObjectData",
       ];
 
       // buttons
@@ -463,6 +523,7 @@
       let requestUserMessage = document.getElementById("requestUserMessage");
       let resetObjectData = document.getElementById("resetObjectData");
       let updateObjectData = document.getElementById("updateObjectData");
+      let requestObjectData = document.getElementById("requestObjectData");
       let sendApplicationMessage = document.getElementById(
         "sendApplicationMessage"
       );
@@ -495,6 +556,23 @@
           function (value) {
             alert("successful");
             displayCode(value, 5);
+          },
+          function (error) {
+            alert("unsuccessful");
+          }
+        );
+      });
+
+      requestObjectData.addEventListener("clicked", () => {
+        console.log("sending message");
+
+        let objName = document.getElementById("objectName").value;
+
+        floCloudAPI.requestObjectData(objName).then(
+          function (value) {
+            let result = floGlobals.appObjects[objName];
+            alert("successful");
+            displayCode(result, 6);
           },
           function (error) {
             alert("unsuccessful");
@@ -583,8 +661,10 @@
           codeBlock.innerHTML = `floCloudAPI.requestApplicationData()`;
         } else if (index == 4) {
           codeBlock.innerHTML = `floCloudAPI.resetObjectData("${objectName.value}")`;
-        }else if (index == 5) {
+        } else if (index == 5) {
           codeBlock.innerHTML = `floCloudAPI.updateObjectData("${objectName.value}")`;
+        } else if (index == 6) {
+          codeBlock.innerHTML = `floCloudAPI.requestObjectData("${objectName.value}")`;
         }
 
         frag.appendChild(codeLabel);
