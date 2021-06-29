@@ -6,20 +6,21 @@ body {
   --font-family: "Roboto", sans-serif;
   --error-color: #e53935;
 
-  /* background-color: rgb(243, 244, 246); */
+  background-color: rgb(243, 244, 246);
   font-family: "Roboto", sans-serif;
   overflow-y: scroll;
+  margin: 0;
 }
 
 .main_block {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1em;
 }
 
 .form-group {
-  max-width: 900px;
+  background-color: #fff;
+  max-width: 1000px;
   width: 90%;
   padding: 1.5em;
 }
@@ -37,14 +38,14 @@ sm-button {
   width: 100%;
 }
 
-.demoArea {
-  max-width: 900px;
-  width: 90%;
-  padding: 0 1em;
+fieldset {
+  max-width: 800px;
+  padding: 2em;
 }
 
 .demo-inner-blocks,
-.descriptionBlocks {
+.descriptionBlocks,
+.syntax {
   width: 100%;
 }
 
@@ -73,4 +74,78 @@ sm-button {
   align-items: center;
   border-radius: 50%;
   cursor: pointer;
+}
+
+h1 {
+  border-bottom: 1px solid #000;
+  padding-bottom: 0.5em;
+  font-size: 2.5rem;
+}
+
+@media (max-width: 320px) {
+  .plus {
+    font-size: 1.5rem;
+    background-color: rgba(var(--text-color), 0.06);
+    color: #696969;
+    width: 3em;
+    height: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  fieldset {
+    max-width: 800px;
+    padding: 1em;
+  }
+
+  h1 {
+    border-bottom: 1px solid #000;
+    padding-bottom: 0.5em;
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 376px) {
+  .plus {
+    font-size: 1.5rem;
+    background-color: rgba(var(--text-color), 0.06);
+    color: #696969;
+    width: 2.5em;
+    height: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  h1 {
+    border-bottom: 1px solid #000;
+    padding-bottom: 0.5em;
+    font-size: 1.75rem;
+  }
+}
+
+@media (min-width: 376px) and (max-width: 576px) {
+  .plus {
+    font-size: 1.5rem;
+    background-color: rgba(var(--text-color), 0.06);
+    color: #696969;
+    width: 2em;
+    height: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  h1 {
+    border-bottom: 1px solid #000;
+    padding-bottom: 0.5em;
+    font-size: 2rem;
+  }
 }

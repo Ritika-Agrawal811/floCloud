@@ -57,7 +57,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
@@ -124,20 +124,22 @@
               </p>
             </div>
 
-            <div class="demoSendApplicationData demoArea">
-              <h3>Demo</h3>
-              <sm-input
-                placeholder="Type your message here"
-                type="text"
-                animate
-                id="userMessage"
-                class="demo-inner-blocks"
-              >
-              </sm-input>
-              <sm-button variant="primary" id="sendApplicationMessage"
-                >Send</sm-button
-              >
-            </div>
+            <fieldset>
+              <legend><h3>Demo</h3></legend>
+              <div class="demoSendApplicationData demoArea">
+                <sm-input
+                  placeholder="Type your message here"
+                  type="text"
+                  animate
+                  id="userMessage"
+                  class="demo-inner-blocks"
+                >
+                </sm-input>
+                <sm-button variant="primary" id="sendApplicationMessage"
+                  >Send</sm-button
+                >
+              </div>
+            </fieldset>
 
             <div
               id="requestApplicationDataBlock"
@@ -191,12 +193,14 @@
               </p>
             </div>
 
-            <div class="demoRequestApplicationData demoArea">
-              <h3>Demo</h3>
-              <sm-button variant="primary" id="requestApplicationMessage"
-                >Request</sm-button
-              >
-            </div>
+            <fieldset>
+              <legend><h3>Demo</h3></legend>
+              <div class="demoRequestApplicationData demoArea">
+                <sm-button variant="primary" id="requestApplicationMessage"
+                  >Request</sm-button
+                >
+              </div>
+            </fieldset>
           </sm-panel>
 
           <!-- General Data -->
@@ -229,18 +233,22 @@
               </p>
             </div>
 
-            <div class="demoSendGeneralData demoArea">
-              <h3>Demo</h3>
-              <sm-input
-                placeholder="Type your message here"
-                type="text"
-                animate
-                id="userMessage"
-                class="demo-inner-blocks"
-              >
-              </sm-input>
-              <sm-button variant="primary" id="sendUserMessage">Send</sm-button>
-            </div>
+            <fieldset>
+              <legend><h3>Demo</h3></legend>
+              <div class="demoSendGeneralData demoArea">
+                <sm-input
+                  placeholder="Type your message here"
+                  type="text"
+                  animate
+                  id="userMessage"
+                  class="demo-inner-blocks"
+                >
+                </sm-input>
+                <sm-button variant="primary" id="sendUserMessage"
+                  >Send</sm-button
+                >
+              </div>
+            </fieldset>
 
             <div id="requestGeneralDataBlock" class="descriptionBlocks">
               <h2>requestGeneralData</h2>
@@ -287,12 +295,15 @@
                 floCloudAPI.requestGeneralData(type, options = {})
               </p>
             </div>
-            <div class="demoRequestGeneralData demoArea">
-              <h3>Demo</h3>
-              <sm-button variant="primary" id="requestUserMessage"
-                >Request</sm-button
-              >
-            </div>
+
+            <fieldset>
+              <legend><h3>Demo</h3></legend>
+              <div class="demoRequestGeneralData demoArea">
+                <sm-button variant="primary" id="requestUserMessage">
+                  Request
+                </sm-button>
+              </div>
+            </fieldset>
           </sm-panel>
 
           <!-- Object Data -->
@@ -327,47 +338,49 @@
               </p>
             </div>
 
-            <div class="demoResetObjectData demoArea">
-              <h3>Demo</h3>
-              <sm-input
-                placeholder="Type the name of the Object"
-                type="text"
-                animate
-                id="objectName"
-                class="demo-inner-blocks"
-              >
-              </sm-input>
+            <fieldset>
+              <legend><h3>Demo</h3></legend>
+              <div class="demoResetObjectData demoArea">
+                <sm-input
+                  placeholder="Object Name"
+                  type="text"
+                  animate
+                  id="objectName"
+                  class="demo-inner-blocks"
+                >
+                </sm-input>
 
-              <div class="keyValuePairs" id="resetKeyValueBlock">
-                <h4>Key-Value Pairs</h4>
-                <p>Write the key value pairs for the Object.</p>
-                <div id="pair1" class="pairs">
-                  <sm-input
-                    placeholder="Type the key"
-                    type="text"
-                    animate
-                    class="object-inner-blocks key"
-                  >
-                  </sm-input>
-                  <sm-input
-                    placeholder="Type the Value"
-                    type="text"
-                    animate
-                    class="object-inner-blocks value"
-                  >
-                  </sm-input>
-                  <div
-                    class="plus"
-                    onclick="addKeyValuePairs('resetKeyValueBlock' ,'pair1', 2)"
-                  >
-                    +
+                <div class="keyValuePairs" id="resetKeyValueBlock">
+                  <h4>Key-Value Pairs</h4>
+                  <p>Write the key value pairs for the Object.</p>
+                  <div id="pair1" class="pairs">
+                    <sm-input
+                      placeholder="Key"
+                      type="text"
+                      animate
+                      class="object-inner-blocks key"
+                    >
+                    </sm-input>
+                    <sm-input
+                      placeholder="Value"
+                      type="text"
+                      animate
+                      class="object-inner-blocks value"
+                    >
+                    </sm-input>
+                    <div
+                      class="plus"
+                      onclick="addKeyValuePairs('resetKeyValueBlock' ,'pair1', 2)"
+                    >
+                      +
+                    </div>
                   </div>
                 </div>
+                <sm-button variant="primary" id="resetObjectData"
+                  >Reset</sm-button
+                >
               </div>
-              <sm-button variant="primary" id="resetObjectData"
-                >Reset</sm-button
-              >
-            </div>
+            </fieldset>
 
             <div id="updateObjectDataBlock" class="descriptionBlocks">
               <h2>updateObjectData</h2>
@@ -398,47 +411,49 @@
               </p>
             </div>
 
-            <div class="demoUpdateObjectData demoArea">
-              <h3>Demo</h3>
-              <sm-input
-                placeholder="Type the name of the Object"
-                type="text"
-                animate
-                id="objectName"
-                class="demo-inner-blocks"
-              >
-              </sm-input>
+            <fieldset>
+              <legend><h3>Demo</h3></legend>
+              <div class="demoUpdateObjectData demoArea">
+                <sm-input
+                  placeholder="Object Name"
+                  type="text"
+                  animate
+                  id="objectName"
+                  class="demo-inner-blocks"
+                >
+                </sm-input>
 
-              <div class="keyValuePairs" id="updateKeyValueBlock">
-                <h4>Key-Value Pairs</h4>
-                <p>Write the key value pairs for the Object.</p>
-                <div id="pair1" class="pairs">
-                  <sm-input
-                    placeholder="Type the key"
-                    type="text"
-                    animate
-                    class="object-inner-blocks key"
-                  >
-                  </sm-input>
-                  <sm-input
-                    placeholder="Type the Value"
-                    type="text"
-                    animate
-                    class="object-inner-blocks value"
-                  >
-                  </sm-input>
-                  <div
-                    class="plus"
-                    onclick="addKeyValuePairs('updateKeyValueBlock' ,'pair1', 2)"
-                  >
-                    +
+                <div class="keyValuePairs" id="updateKeyValueBlock">
+                  <h4>Key-Value Pairs</h4>
+                  <p>Write the key value pairs for the Object.</p>
+                  <div id="pair1" class="pairs">
+                    <sm-input
+                      placeholder="Key"
+                      type="text"
+                      animate
+                      class="object-inner-blocks key"
+                    >
+                    </sm-input>
+                    <sm-input
+                      placeholder="Value"
+                      type="text"
+                      animate
+                      class="object-inner-blocks value"
+                    >
+                    </sm-input>
+                    <div
+                      class="plus"
+                      onclick="addKeyValuePairs('updateKeyValueBlock' ,'pair1', 2)"
+                    >
+                      +
+                    </div>
                   </div>
                 </div>
+                <sm-button variant="primary" id="updateObjectData"
+                  >Update</sm-button
+                >
               </div>
-              <sm-button variant="primary" id="updateObjectData"
-                >Update</sm-button
-              >
-            </div>
+            </fieldset>
 
             <div id="requestObjectDataBlock" class="descriptionBlocks">
               <h2>requestObjectData</h2>
@@ -484,20 +499,22 @@
               </p>
             </div>
 
-            <div class="demoRequestObjectData demoArea">
-              <h3>Demo</h3>
-              <sm-input
-                placeholder="Type the name of the Object"
-                type="text"
-                animate
-                id="objectName"
-                class="demo-inner-blocks"
-              >
-              </sm-input>
-              <sm-button variant="primary" id="requestObjectData"
-                >Request</sm-button
-              >
-            </div>
+            <fieldset>
+              <legend><h3>Demo</h3></legend>
+              <div class="demoRequestObjectData demoArea">
+                <sm-input
+                  placeholder="Object Name"
+                  type="text"
+                  animate
+                  id="objectName"
+                  class="demo-inner-blocks"
+                >
+                </sm-input>
+                <sm-button variant="primary" id="requestObjectData"
+                  >Request</sm-button
+                >
+              </div>
+            </fieldset>
           </sm-panel>
         </sm-tab-panels>
       </div>
