@@ -5,6 +5,7 @@ body {
   --foreground-color: 255, 255, 255;
   --font-family: "Roboto", sans-serif;
   --error-color: #e53935;
+  --tab-indicator-border-radius: 0 0;
 
   background-color: rgb(243, 244, 246);
   font-family: "Roboto", sans-serif;
@@ -80,6 +81,14 @@ h1 {
   border-bottom: 1px solid #000;
   padding-bottom: 0.5em;
   font-size: 2.5rem;
+}
+
+sm-tab-header {
+  background-color: #e5e5e5;
+}
+
+sm-tab {
+  padding: 0.35em;
 }
 
 @media (max-width: 320px) {

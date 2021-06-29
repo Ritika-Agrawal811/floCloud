@@ -3176,6 +3176,7 @@ smTabHeader.innerHTML = `
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
+        
     }
     .tabs{
         position: relative;
@@ -3201,7 +3202,7 @@ smTabHeader.innerHTML = `
         left: 0;
         bottom: 0;
         height: 0.15rem;
-        border-radius: 1rem 1rem 0 0;  
+        border-radius: var(--tab-indicator-border-radius); 
         background: var(--accent-color);
         -webkit-transition: width 0.3s, -webkit-transform 0.3s;
         transition: width 0.3s, -webkit-transform 0.3s;
@@ -3212,10 +3213,10 @@ smTabHeader.innerHTML = `
     }
     :host([variant="tab"]) .indicator{
         height: 100%;
-        border-radius: 0.3rem;
+        border-radius: var(--tab-indicator-border-radius);
     }
     :host(.round) .indicator{
-        border-radius: 3rem;
+        border-radius: var(--tab-indicator-border-radius);
     }
     :host([variant="tab"]) .tab-header{
         border-bottom: none; 
@@ -3228,7 +3229,7 @@ smTabHeader.innerHTML = `
         display: -ms-inline-grid;
         display: inline-grid;
         justify-self: flex-start;
-        border-radius: 0.3rem;
+        border-radius: var(--tab-indicator-border-radius);
     }
     :host([variant="tab"]) slot::slotted(.active){
         color: rgba(var(--foreground-color), 1);
