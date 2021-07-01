@@ -26,6 +26,10 @@ body {
   padding: 1.5em;
 }
 
+sm-input {
+  margin-bottom: 1em;
+}
+
 sm-button {
   margin-top: 1rem;
 }
@@ -39,9 +43,10 @@ sm-button {
   width: 100%;
 }
 
-fieldset {
-  max-width: 800px;
-  padding: 2em;
+.demoArea {
+  border: 2px solid #aaa;
+  padding: 1em;
+  max-width: 600px;
 }
 
 .demo-inner-blocks,
