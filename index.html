@@ -130,8 +130,7 @@
                 placeholder="Type your message here"
                 type="text"
                 animate
-                id="userMessage"
-                class="demo-inner-blocks"
+                class="demo-inner-blocks message"
               >
               </sm-input>
 
@@ -243,8 +242,7 @@
                 placeholder="Type your message here"
                 type="text"
                 animate
-                id="userMessage"
-                class="demo-inner-blocks"
+                class="demo-inner-blocks message"
               >
               </sm-input>
               <sm-input
@@ -529,7 +527,7 @@
     <script>
       let type;
 
-      let userMessage = document.getElementById("userMessage");
+      let userMessage;
       let objectName = document.getElementById("objectName");
       let demo = [
         "demoSendGeneralData",
@@ -608,8 +606,9 @@
         console.log("sending message");
 
         setType(demo[2]);
+        setMessage(demo[2]);
 
-        floCloudAPI.sendApplicationData(userMessage.value, type).then(
+        floCloudAPI.sendApplicationData(userMessage, type).then(
           function (value) {
             alert("successful");
             displayCode(value, 2);
@@ -637,8 +636,9 @@
         console.log("sending message");
 
         setType(demo[0]);
+        setMessage(demo[0]);
 
-        floCloudAPI.sendGeneralData(userMessage.value, type).then(
+        floCloudAPI.sendGeneralData(userMessage, type).then(
           function (value) {
             alert("successful");
             displayCode(value, 0);
@@ -752,6 +752,17 @@
           type = "type2";
         } else {
           type = messageType;
+        }
+      }
+
+      function setMessage(blockID) {
+        let block = document.querySelector("." + blockID);
+        let message = block.querySelector(".message").value;
+
+        if (!message) {
+          userMessage = "test message";
+        } else {
+          userMessage = message;
         }
       }
     </script>

@@ -80,6 +80,7 @@ sm-button {
   align-items: center;
   border-radius: 50%;
   cursor: pointer;
+  margin-top: -15px;
 }
 
 h1 {
