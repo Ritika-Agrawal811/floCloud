@@ -211,7 +211,32 @@
           <sm-panel class="hide-completely panels">
             <div id="sendGeneralDataBlock" class="descriptionBlocks">
               <h2>sendGeneralData</h2>
-              <p>sendGeneralData sends general data to the cloud.</p>
+              <p>
+                sendGeneralData sends general data to the cloud.
+                <a onclick="displayPopUp('sendGeneralDataPopUp')"
+                  >Read more about sendGeneralData >></a
+                >
+                <sm-popup id="sendGeneralDataPopUp">
+                  Never use senderIDs in SEND GENERAL DATA options. The system
+                  automatically picks the FLO ID of the sender from FLO Globals.
+                  Its a common mistake developers make.
+
+                  <br />
+                  <br />
+                  Type is mandatory in SEND GENERAL DATA because without at
+                  least one data identifier like TYPE, the message cannot be
+                  retrieved back. <br />
+                  <br />
+                  Application field is used by the Cloud to judge whether this
+                  message should be deleted after 7 days, or stored permanently.
+                  Developers should be careful not to change value of
+                  application field if the default value enables the message to
+                  be stored permanently. Currently messages sent from subadmins
+                  to any receiverID for applications notified by the cloud in
+                  the FLO Blockchain are stored permanently. So do not change
+                  application field as a caution. Use the comment field.
+                </sm-popup>
+              </p>
               <ul>
                 <li>Parameters</li>
                 <ol>
@@ -230,6 +255,7 @@
                   <li>comment - user comment for the data</li>
                 </ol>
               </ul>
+
               <p>Syntax:</p>
               <p class="syntax">
                 floCloudAPI.sendGeneralData(message, type, options = {})
@@ -354,8 +380,7 @@
                 placeholder="Object Name"
                 type="text"
                 animate
-                id="objectName"
-                class="demo-inner-blocks"
+                class="demo-inner-blocks objectName"
               >
               </sm-input>
 
@@ -425,8 +450,7 @@
                 placeholder="Object Name"
                 type="text"
                 animate
-                id="objectName"
-                class="demo-inner-blocks"
+                class="demo-inner-blocks objectName"
               >
               </sm-input>
 
@@ -511,8 +535,7 @@
                 placeholder="Object Name"
                 type="text"
                 animate
-                id="objectName"
-                class="demo-inner-blocks"
+                class="demo-inner-blocks objectName"
               >
               </sm-input>
               <sm-button variant="primary" id="requestObjectData"
@@ -528,7 +551,7 @@
       let type;
 
       let userMessage;
-      let objectName = document.getElementById("objectName");
+      let objectName;
       let demo = [
         "demoSendGeneralData",
         "demoRequestGeneralData",
@@ -555,6 +578,9 @@
       resetObjectData.addEventListener("clicked", () => {
         console.log("sending message");
 
+        resetData(demo[4]);
+        setObjectName(demo[4]);
+
         let objName = generateObject("resetKeyValueBlock");
 
         floCloudAPI.resetObjectData(objName).then(
@@ -570,6 +596,9 @@
 
       updateObjectData.addEventListener("clicked", () => {
         console.log("sending message");
+
+        resetData(demo[5]);
+        setObjectName(demo[5]);
 
         let objName = generateObject("updateKeyValueBlock");
 
@@ -587,11 +616,12 @@
       requestObjectData.addEventListener("clicked", () => {
         console.log("sending message");
 
-        let objName = document.getElementById("objectName").value;
+        resetData(demo[6]);
+        setObjectName(demo[6]);
 
-        floCloudAPI.requestObjectData(objName).then(
+        floCloudAPI.requestObjectData(objectName).then(
           function (value) {
-            let result = floGlobals.appObjects[objName];
+            let result = floGlobals.appObjects[objectName];
 
             alert("successful");
             displayCode(result, 6);
@@ -604,6 +634,8 @@
 
       sendApplicationMessage.addEventListener("clicked", () => {
         console.log("sending message");
+
+        resetData(demo[2]);
 
         setType(demo[2]);
         setMessage(demo[2]);
@@ -621,6 +653,9 @@
 
       requestApplicationMessage.addEventListener("clicked", () => {
         console.log("requesting message");
+
+        resetData(demo[3]);
+
         floCloudAPI.requestApplicationData().then(
           function (value) {
             alert("successful");
@@ -634,7 +669,7 @@
 
       sendUserMessage.addEventListener("clicked", () => {
         console.log("sending message");
-
+        resetData(demo[0]);
         setType(demo[0]);
         setMessage(demo[0]);
 
@@ -651,7 +686,7 @@
 
       requestUserMessage.addEventListener("clicked", () => {
         console.log("requesting message");
-
+        resetData(demo[1]);
         setType(demo[1]);
 
         floCloudAPI.requestGeneralData(type).then(
@@ -684,19 +719,19 @@
         outputBlock.innerHTML = JSON.stringify(value, undefined, 4);
 
         if (index == 0) {
-          codeBlock.innerHTML = `floCloudAPI.sendGeneralData("${userMessage.value}", "${type}")`;
+          codeBlock.innerHTML = `floCloudAPI.sendGeneralData("${userMessage}", "${type}")`;
         } else if (index == 1) {
           codeBlock.innerHTML = `floCloudAPI.requestGeneralData("${type}"")`;
         } else if (index == 2) {
-          codeBlock.innerHTML = `floCloudAPI.sendApplicationData("${userMessage.value}", "${type}")`;
+          codeBlock.innerHTML = `floCloudAPI.sendApplicationData("${userMessage}", "${type}")`;
         } else if (index == 3) {
           codeBlock.innerHTML = `floCloudAPI.requestApplicationData()`;
         } else if (index == 4) {
-          codeBlock.innerHTML = `floCloudAPI.resetObjectData("${objectName.value}")`;
+          codeBlock.innerHTML = `floCloudAPI.resetObjectData("${objectName}")`;
         } else if (index == 5) {
-          codeBlock.innerHTML = `floCloudAPI.updateObjectData("${objectName.value}")`;
+          codeBlock.innerHTML = `floCloudAPI.updateObjectData("${objectName}")`;
         } else if (index == 6) {
-          codeBlock.innerHTML = `floCloudAPI.requestObjectData("${objectName.value}")`;
+          codeBlock.innerHTML = `floCloudAPI.requestObjectData("${objectName}")`;
         }
 
         frag.appendChild(codeLabel);
@@ -727,7 +762,7 @@
       function generateObject(id) {
         let keyValueBlock = document.getElementById(id);
         let pairs = keyValueBlock.querySelectorAll(".pairs");
-        let objUser = objectName.value;
+        let objUser = objectName;
         let obj = {};
 
         pairs.forEach((pair) => {
@@ -764,6 +799,39 @@
         } else {
           userMessage = message;
         }
+      }
+
+      function setObjectName(blockID) {
+        let block = document.querySelector("." + blockID);
+        let obj = block.querySelector(".objectName").value;
+
+        if (!obj) {
+          objectName = "objTest";
+        } else {
+          objectName = obj;
+        }
+      }
+
+      function resetData(blockID) {
+        let block = document.querySelector("." + blockID);
+        let p = block.querySelectorAll("p");
+        let pre = block.querySelectorAll("pre");
+
+        if (p && pre) {
+          p.forEach((ele) => {
+            ele.innerHTML = "";
+          });
+
+          pre.forEach((ele) => {
+            ele.innerHTML = "";
+          });
+        }
+      }
+
+      function displayPopUp(id) {
+        let popUp = document.getElementById(id);
+
+        popUp.show();
       }
     </script>
     <script src="scripts/components.js"></script>
