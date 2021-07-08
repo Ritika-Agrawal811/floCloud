@@ -105,7 +105,7 @@ a {
 }
 
 sm-popup {
-  --width: min(50rem, 90%);
+  --width: min(50rem, 100%);
   --body-padding: 3rem;
 }
 
@@ -133,6 +133,11 @@ sm-popup {
     padding-bottom: 0.5em;
     font-size: 1.5rem;
   }
+
+  sm-popup {
+    --width: min(18rem, 100%);
+    --body-padding: 0.5rem;
+  }
 }
 
 @media (min-width: 321px) and (max-width: 376px) {
@@ -154,6 +159,11 @@ sm-popup {
     padding-bottom: 0.5em;
     font-size: 1.75rem;
   }
+
+  sm-popup {
+    --width: min(20rem, 100%);
+    --body-padding: 0.5rem;
+  }
 }
 
 @media (min-width: 376px) and (max-width: 576px) {
@@ -174,5 +184,10 @@ sm-popup {
     border-bottom: 1px solid #000;
     padding-bottom: 0.5em;
     font-size: 2rem;
+  }
+
+  sm-popup {
+    --width: min(22rem, 100%);
+    --body-padding: 0.5rem;
   }
 }
