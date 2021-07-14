@@ -109,6 +109,17 @@ sm-popup {
   --body-padding: 3rem;
 }
 
+.line {
+  width: 100%;
+  height: 0.5px;
+  background-color: #000;
+  margin-top: -0.75em;
+}
+
+.optionsHeading {
+  text-align: center;
+}
+
 @media (max-width: 320px) {
   .plus {
     font-size: 1.5rem;

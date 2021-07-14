@@ -65,6 +65,7 @@
 
   <body onload="onLoadStartUp()">
     <sm-popup id="sendGeneralDataPopUp">
+      <h3>sendGeneralData</h3>
       <p>
         Never use senderIDs in SEND GENERAL DATA options. The system
         automatically picks the FLO ID of the sender from FLO Globals. Its a
@@ -88,6 +89,7 @@
     </sm-popup>
 
     <sm-popup id="requestGeneralDataPopUp">
+      <h3>requestGeneralData</h3>
       <p>
         The results are available in floGlobals.generalData after the request
         promise has been resolved
@@ -117,6 +119,7 @@
     </sm-popup>
 
     <sm-popup id="ObjectDataPopUp">
+      <h3>resetObjectData and updateObjectData</h3>
       <p>
         Note: The object data corresponding with Object Name must be defined in
         floGlobals.appObjects[objectName] before a reset or update can be done.
@@ -135,6 +138,7 @@
     </sm-popup>
 
     <sm-popup id="requestObjectDataPopUp">
+      <h3>requestObjectData</h3>
       <p>
         The output is available in floGlobals.appObjects[objectName] after
         request Object Data promise is resolved.
@@ -157,6 +161,7 @@
     </sm-popup>
 
     <sm-popup id="sendApplicationDataPopUp">
+      <h3>sendApplicationData</h3>
       <p>
         Results will be available in
         promise.resolve(requestApplicationData(..)), and user will have to
@@ -195,6 +200,7 @@
     </sm-popup>
 
     <sm-popup id="requestApplicationDataPopUp">
+      <h3>requestApplicationData</h3>
       <p>
         Important: Never use senderIDs in SEND DATA options. The system
         automatically picks the FLO ID of the sender from FLO Globals. Its a
@@ -251,7 +257,8 @@
               class="descriptionBlocks hideBlock"
             >
               <h2>sendApplicationData</h2>
-              <p>sendApplicationData sends application data to the cloud.
+              <p>
+                sendApplicationData sends application data to the cloud.
                 <a onclick="displayPopUp('sendApplicationDataPopUp')"
                   >Read more about sendApplicationData >></a
                 >
@@ -297,6 +304,30 @@
                 class="demo-inner-blocks messageType"
               >
               </sm-input>
+
+              <p class="optionsHeading">SET OPTIONS</p>
+              <p class="line"></p>
+              <sm-input
+                placeholder="ReceiverID"
+                type="text"
+                animate
+                class="demo-inner-blocks receiverID"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Application Name"
+                type="text"
+                animate
+                class="demo-inner-blocks applicationName"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Add a comment"
+                type="text"
+                animate
+                class="demo-inner-blocks comment"
+              ></sm-input>
+
               <sm-button variant="primary" id="sendApplicationMessage"
                 >Send</sm-button
               >
@@ -310,8 +341,8 @@
               <p>
                 requestApplicationData requests application data from the cloud.
                 <a onclick="displayPopUp('requestApplicationDataPopUp')"
-                >Read more about requestApplicationData >></a
-              >
+                  >Read more about requestApplicationData >></a
+                >
               </p>
               <ul>
                 <li>Parameters</li>
@@ -359,6 +390,35 @@
 
             <div class="demoRequestApplicationData demoArea">
               <h3>Demo</h3>
+              <p class="optionsHeading">SET OPTIONS</p>
+              <p class="line"></p>
+              <sm-input
+                placeholder="ReceiverID"
+                type="text"
+                animate
+                class="demo-inner-blocks receiverID"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Type"
+                type="text"
+                animate
+                class="demo-inner-blocks typeName"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Application Name"
+                type="text"
+                animate
+                class="demo-inner-blocks applicationName"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Add a comment"
+                type="text"
+                animate
+                class="demo-inner-blocks comment"
+              ></sm-input>
               <sm-button variant="primary" id="requestApplicationMessage"
                 >Request</sm-button
               >
@@ -417,6 +477,30 @@
                 class="demo-inner-blocks messageType"
               >
               </sm-input>
+
+              <p class="optionsHeading">SET OPTIONS</p>
+              <p class="line"></p>
+              <sm-input
+                placeholder="ReceiverID"
+                type="text"
+                animate
+                class="demo-inner-blocks receiverID"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Application Name"
+                type="text"
+                animate
+                class="demo-inner-blocks applicationName"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Add a comment"
+                type="text"
+                animate
+                class="demo-inner-blocks comment"
+              ></sm-input>
+
               <sm-button variant="primary" id="sendUserMessage">Send</sm-button>
             </div>
 
@@ -425,8 +509,8 @@
               <p>
                 requestGeneralData requests application data from the cloud.
                 <a onclick="displayPopUp('requestGeneralDataPopUp')"
-                >Read more about requestGeneralData >></a
-              >
+                  >Read more about requestGeneralData >></a
+                >
               </p>
               <ul>
                 <li>Parameters</li>
@@ -478,6 +562,30 @@
                 class="demo-inner-blocks messageType"
               >
               </sm-input>
+
+              <p class="optionsHeading">SET OPTIONS</p>
+              <p class="line"></p>
+              <sm-input
+                placeholder="ReceiverID"
+                type="text"
+                animate
+                class="demo-inner-blocks receiverID"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Application Name"
+                type="text"
+                animate
+                class="demo-inner-blocks applicationName"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Add a comment"
+                type="text"
+                animate
+                class="demo-inner-blocks comment"
+              ></sm-input>
+
               <sm-button variant="primary" id="requestUserMessage">
                 Request
               </sm-button>
@@ -489,10 +597,11 @@
           <sm-panel class="hide-completely panels">
             <div id="resetObjectDataBlock" class="descriptionBlocks">
               <h2>resetObjectData</h2>
-              <p>resetObjectData resets the objectData to cloud.
+              <p>
+                resetObjectData resets the objectData to cloud.
                 <a onclick="displayPopUp('ObjectDataPopUp')"
-                >Read more about resetObjectData >></a
-              >
+                  >Read more about resetObjectData >></a
+                >
               </p>
               <ul>
                 <li>Parameters</li>
@@ -556,6 +665,29 @@
                   </div>
                 </div>
               </div>
+
+              <p class="optionsHeading">SET OPTIONS</p>
+              <p class="line"></p>
+              <sm-input
+                placeholder="ReceiverID"
+                type="text"
+                animate
+                class="demo-inner-blocks receiverID"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Application Name"
+                type="text"
+                animate
+                class="demo-inner-blocks applicationName"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Add a comment"
+                type="text"
+                animate
+                class="demo-inner-blocks comment"
+              ></sm-input>
               <sm-button variant="primary" id="resetObjectData"
                 >Reset</sm-button
               >
@@ -563,10 +695,11 @@
 
             <div id="updateObjectDataBlock" class="descriptionBlocks">
               <h2>updateObjectData</h2>
-              <p>updateObjectData updates the objectData to cloud.
+              <p>
+                updateObjectData updates the objectData to cloud.
                 <a onclick="displayPopUp('ObjectDataPopUp')"
-                >Read more about updateObjectData >></a
-              >
+                  >Read more about updateObjectData >></a
+                >
               </p>
               <ul>
                 <li>Parameters</li>
@@ -630,6 +763,30 @@
                   </div>
                 </div>
               </div>
+
+              <p class="optionsHeading">SET OPTIONS</p>
+              <p class="line"></p>
+              <sm-input
+                placeholder="ReceiverID"
+                type="text"
+                animate
+                class="demo-inner-blocks receiverID"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Application Name"
+                type="text"
+                animate
+                class="demo-inner-blocks applicationName"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Add a comment"
+                type="text"
+                animate
+                class="demo-inner-blocks comment"
+              ></sm-input>
+
               <sm-button variant="primary" id="updateObjectData"
                 >Update</sm-button
               >
@@ -637,10 +794,11 @@
 
             <div id="requestObjectDataBlock" class="descriptionBlocks">
               <h2>requestObjectData</h2>
-              <p>requestObjectData requests application data from the cloud.
+              <p>
+                requestObjectData requests application data from the cloud.
                 <a onclick="displayPopUp('requestObjectDataPopUp')"
-                >Read more about requestObjectData >></a
-              >
+                  >Read more about requestObjectData >></a
+                >
               </p>
               <ul>
                 <li>Parameters</li>
@@ -692,6 +850,29 @@
                 class="demo-inner-blocks objectName"
               >
               </sm-input>
+
+              <p class="optionsHeading">SET OPTIONS</p>
+              <p class="line"></p>
+              <sm-input
+                placeholder="ReceiverID"
+                type="text"
+                animate
+                class="demo-inner-blocks receiverID"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Application Name"
+                type="text"
+                animate
+                class="demo-inner-blocks applicationName"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Add a comment"
+                type="text"
+                animate
+                class="demo-inner-blocks comment"
+              ></sm-input>
               <sm-button variant="primary" id="requestObjectData"
                 >Request</sm-button
               >
@@ -734,10 +915,11 @@
 
         resetData(demo[4]);
         setObjectName(demo[4]);
+        let optionsObj = setOptions(demo[4]);
 
         let objName = generateObject("resetKeyValueBlock");
 
-        floCloudAPI.resetObjectData(objName).then(
+        floCloudAPI.resetObjectData(objName , optionsObj).then(
           function (value) {
             alert("successful");
             displayCode(value, 4);
@@ -753,10 +935,11 @@
 
         resetData(demo[5]);
         setObjectName(demo[5]);
+        let optionsObj = setOptions(demo[5]);
 
         let objName = generateObject("updateKeyValueBlock");
 
-        floCloudAPI.updateObjectData(objName).then(
+        floCloudAPI.updateObjectData(objName , optionsObj).then(
           function (value) {
             alert("successful");
             displayCode(value, 5);
@@ -773,7 +956,9 @@
         resetData(demo[6]);
         setObjectName(demo[6]);
 
-        floCloudAPI.requestObjectData(objectName).then(
+        let optionsObj = setOptions(demo[6]);
+
+        floCloudAPI.requestObjectData(objectName , optionsObj).then(
           function (value) {
             let result = floGlobals.appObjects[objectName];
 
@@ -793,8 +978,9 @@
 
         setType(demo[2]);
         setMessage(demo[2]);
+        let optionsObj = setOptions(demo[2]);
 
-        floCloudAPI.sendApplicationData(userMessage, type).then(
+        floCloudAPI.sendApplicationData(userMessage, type, optionsObj).then(
           function (value) {
             alert("successful");
             displayCode(value, 2);
@@ -809,8 +995,9 @@
         console.log("requesting message");
 
         resetData(demo[3]);
+        let optionsObj = setOptions(demo[3]);
 
-        floCloudAPI.requestApplicationData().then(
+        floCloudAPI.requestApplicationData(optionsObj).then(
           function (value) {
             alert("successful");
             displayCode(value, 3);
@@ -827,7 +1014,9 @@
         setType(demo[0]);
         setMessage(demo[0]);
 
-        floCloudAPI.sendGeneralData(userMessage, type).then(
+        let optionsObj = setOptions(demo[0]);
+
+        floCloudAPI.sendGeneralData(userMessage, type, optionsObj).then(
           function (value) {
             alert("successful");
             displayCode(value, 0);
@@ -843,7 +1032,9 @@
         resetData(demo[1]);
         setType(demo[1]);
 
-        floCloudAPI.requestGeneralData(type).then(
+        let optionsObj = setOptions(demo[1]);
+
+        floCloudAPI.requestGeneralData(type , optionsObj).then(
           function (value) {
             alert("successful");
 
@@ -964,6 +1155,37 @@
         } else {
           objectName = obj;
         }
+      }
+
+      function setOptions(blockID) {
+        let block = document.querySelector("." + blockID);
+        let comment = block.querySelector(".comment").value;
+        let applicationName = block.querySelector(".applicationName").value;
+        let receiverID = block.querySelector(".receiverID").value;
+        let optionsType;
+        let optionsObj = {};
+
+        if (blockID == "demoRequestApplicationData") {
+          optionsType = block.querySelector(".typeName").value;
+        }
+
+        if (comment) {
+          optionsObj["comment"] = comment;
+        }
+
+        if (applicationName) {
+          optionsObj["application"] = applicationName;
+        }
+
+        if (receiverID) {
+          optionsObj["receiverID"] = applicationName;
+        }
+
+        if (optionsType) {
+          optionsObj["Type"] = optionsType;
+        }
+
+        return optionsObj;
       }
 
       function resetData(blockID) {
