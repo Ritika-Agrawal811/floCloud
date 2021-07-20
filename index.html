@@ -240,8 +240,29 @@
         </p>
 
         <p>
+          Consistent with blockchain data principles, RanchiMall blockchain
+          cloud will also provide data to everyone who asks for it. So sensitive
+          data should be encrypted using the receiver's public key using Crypto
+          functions of FLO Standard Operations.
+        </p>
+
+        <p>
           The basic forms in which users can submit data to the cloud are
           General Data , Object Data and Application Data.
+        </p>
+
+        <p>
+          Consumers of data can ask for data by receiver ID, or filter it by
+          application, type, or comment. They can also ask for data for a given
+          type before and after a certain vector clock.
+        </p>
+
+        <p>
+          Type parameter used in cloud functions is a custom data type. User can
+          set it as anything depending on the purpose of the application. For
+          example for a banking application, type could be set as transactions ,
+          balance etc. Types are used to segregate application messages along
+          broad areas as needed by the application.
         </p>
 
         <sm-tab-header variant="tab" target="tab1">
@@ -400,13 +421,6 @@
               ></sm-input>
 
               <sm-input
-                placeholder="Type"
-                type="text"
-                animate
-                class="demo-inner-blocks typeName"
-              ></sm-input>
-
-              <sm-input
                 placeholder="Application Name"
                 type="text"
                 animate
@@ -419,6 +433,35 @@
                 animate
                 class="demo-inner-blocks comment"
               ></sm-input>
+
+              <sm-input
+                placeholder="Type"
+                type="text"
+                animate
+                class="demo-inner-blocks typeName"
+              ></sm-input>
+
+              <sm-input
+                placeholder="atVectorClock"
+                type="text"
+                animate
+                class="demo-inner-blocks atVectorClock"
+              ></sm-input>
+
+              <sm-input
+                placeholder="lowerVectorClock"
+                type="text"
+                animate
+                class="demo-inner-blocks lowerVectorClock"
+              ></sm-input>
+
+              <sm-input
+                placeholder="upperVectorClock"
+                type="text"
+                animate
+                class="demo-inner-blocks upperVectorClock"
+              ></sm-input>
+
               <sm-button variant="primary" id="requestApplicationMessage"
                 >Request</sm-button
               >
@@ -584,6 +627,34 @@
                 type="text"
                 animate
                 class="demo-inner-blocks comment"
+              ></sm-input>
+
+              <sm-input
+                placeholder="Type"
+                type="text"
+                animate
+                class="demo-inner-blocks typeName"
+              ></sm-input>
+
+              <sm-input
+                placeholder="atVectorClock"
+                type="text"
+                animate
+                class="demo-inner-blocks atVectorClock"
+              ></sm-input>
+
+              <sm-input
+                placeholder="lowerVectorClock"
+                type="text"
+                animate
+                class="demo-inner-blocks lowerVectorClock"
+              ></sm-input>
+
+              <sm-input
+                placeholder="upperVectorClock"
+                type="text"
+                animate
+                class="demo-inner-blocks upperVectorClock"
               ></sm-input>
 
               <sm-button variant="primary" id="requestUserMessage">
@@ -873,6 +944,35 @@
                 animate
                 class="demo-inner-blocks comment"
               ></sm-input>
+
+              <sm-input
+                placeholder="Type"
+                type="text"
+                animate
+                class="demo-inner-blocks typeName"
+              ></sm-input>
+
+              <sm-input
+                placeholder="atVectorClock"
+                type="text"
+                animate
+                class="demo-inner-blocks atVectorClock"
+              ></sm-input>
+
+              <sm-input
+                placeholder="lowerVectorClock"
+                type="text"
+                animate
+                class="demo-inner-blocks lowerVectorClock"
+              ></sm-input>
+
+              <sm-input
+                placeholder="upperVectorClock"
+                type="text"
+                animate
+                class="demo-inner-blocks upperVectorClock"
+              ></sm-input>
+
               <sm-button variant="primary" id="requestObjectData"
                 >Request</sm-button
               >
@@ -919,7 +1019,7 @@
 
         let objName = generateObject("resetKeyValueBlock");
 
-        floCloudAPI.resetObjectData(objName , optionsObj).then(
+        floCloudAPI.resetObjectData(objName, optionsObj).then(
           function (value) {
             alert("successful");
             displayCode(value, 4);
@@ -939,7 +1039,7 @@
 
         let objName = generateObject("updateKeyValueBlock");
 
-        floCloudAPI.updateObjectData(objName , optionsObj).then(
+        floCloudAPI.updateObjectData(objName, optionsObj).then(
           function (value) {
             alert("successful");
             displayCode(value, 5);
@@ -958,7 +1058,7 @@
 
         let optionsObj = setOptions(demo[6]);
 
-        floCloudAPI.requestObjectData(objectName , optionsObj).then(
+        floCloudAPI.requestObjectData(objectName, optionsObj).then(
           function (value) {
             let result = floGlobals.appObjects[objectName];
 
@@ -1034,7 +1134,7 @@
 
         let optionsObj = setOptions(demo[1]);
 
-        floCloudAPI.requestGeneralData(type , optionsObj).then(
+        floCloudAPI.requestGeneralData(type, optionsObj).then(
           function (value) {
             alert("successful");
 
@@ -1163,10 +1263,18 @@
         let applicationName = block.querySelector(".applicationName").value;
         let receiverID = block.querySelector(".receiverID").value;
         let optionsType;
+        let atVectorClock, lowerVectorClock, upperVectorClock;
         let optionsObj = {};
 
-        if (blockID == "demoRequestApplicationData") {
+        if (
+          blockID == "demoRequestApplicationData" ||
+          blockID == "demoRequestGeneralData" ||
+          blockID == "demoRequestObjectData"
+        ) {
           optionsType = block.querySelector(".typeName").value;
+          atVectorClock = block.querySelector(".atVectorClock").value;
+          lowerVectorClock = block.querySelector(".lowerVectorClock").value;
+          upperVectorClock = block.querySelector(".upperVectorClock").value;
         }
 
         if (comment) {
